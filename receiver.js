@@ -17,5 +17,5 @@ socket.addEventListener('message', (event) => {
   const mean = JSON.parse(event.data);
   meanDot.style.left = `${100 * mean[0]}%`;
   meanDot.style.top = `${100 * mean[1]}%`;
-  window.max.outlet(mean[0], mean[1]);
+  window.max.outlet('mean', mean[0], mean[1]);
 });

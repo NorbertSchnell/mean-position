@@ -40,8 +40,11 @@ server.on('connection', (socket, req) => {
 
     for (let socket of server.clients) {
       const pos = positions.get(socket);
-      mean[0] += pos[0];
-      mean[1] += pos[1];
+
+      if (pos) {
+        mean[0] += pos[0];
+        mean[1] += pos[1];
+      }
     }
 
     mean[0] /= positions.size;
