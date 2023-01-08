@@ -22,6 +22,7 @@ server.on('connection', (socket, req) => {
   socket.on('message', (message) => {
     if (message.length > 0) {
       const pos = JSON.parse(message);
+      positions.set(socket, pos);
       broadcastMean();
     }
   });
