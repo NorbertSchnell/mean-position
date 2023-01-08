@@ -2,8 +2,8 @@ const positionDot = document.querySelector('.dot.position');
 const meanDot = document.querySelector('.dot.mean');
 let mouseIsDown = false;
 
-// const socket = new WebSocket('wss://nschnell.uber.space/mean-pointer/');
-const socket = new WebSocket('ws://localhost:8000');
+const socket = new WebSocket('wss://nschnell.uber.space/mean-position/');
+//const socket = new WebSocket('ws://localhost:8000');
 
 window.addEventListener('touchstart', onPointerStart, false);
 window.addEventListener('touchmove', onPointerMove, false);

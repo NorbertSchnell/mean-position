@@ -1,4 +1,4 @@
-const socket = new WebSocket('wss://nschnell.uber.space/mean-pointer/receiver');
+const socket = new WebSocket('wss://nschnell.uber.space/mean-position/receiver');
 //const socket = new WebSocket('ws://localhost:8000/receiver');
 
 const meanDot = document.querySelector('.dot.mean');

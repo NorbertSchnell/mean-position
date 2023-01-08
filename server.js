@@ -8,7 +8,7 @@ const positions = new Map();
 
 // init counters (0 is number of connected clients)
 server.on('connection', (socket, req) => {
-  const isReceiver = (req.url === '/');
+  const isReceiver = (req.url === '/receiver');
 
   if (!isReceiver) {
     positions.set(socket, [0.5, 0.5]);
