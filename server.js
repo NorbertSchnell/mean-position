@@ -4,6 +4,8 @@ const WebSocket = require('ws');
 const port = Number(process.env.PORT) || 8000;
 const server = new WebSocket.Server({ port: port });
 
+console.log('server listening on port', port);
+
 const positions = new Map();
 
 // init counters (0 is number of connected clients)
