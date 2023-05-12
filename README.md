@@ -1,13 +1,19 @@
 # mean-position
 
-In this example, multiple clients can send the position of a circle on screen (moved through touch or pointer) to a server via websockets. The server calculates the mean position of all conntected clients and sends it back to them.
-A particular client page (`receiver.html`) can receive the mean position and output it into Cycling'74 Max using the *jweb* object.
-By default the example uses an open web server which may be running – maybe not...
+In this example, multiple clients can send the position of a circle on screen (moved through touch or pointer) to a server via websockets. The server calculates the mean position of all conntected clients and sends it back to them. In addition, the server sends the mean position via OSC.
+
+A particular client page (`max-receiver.html`) can receive and output the mean position in Cycling'74 Max using the *jweb* and *udpreceive* objects.
+
+By default the example uses a local web server.
 
 The follwing files are important:
 - `index.html`/`client.js`: the web client allowing for sending positions to the server
-- `receiver.html`/`receiver.js`:  the web client allowing for recieving the mean position in Cycling'74 Max
-- `receiver.maxpat`: a Max patch receiving the data using a *jweb* object 
+- `max-receiver.html`/`max-receiver.js`:  the web client allowing for recieving the mean position in Cycling'74 Max
+- `max-receiver.maxpat`: a Max patch receiving the data using a *jweb* object 
 - `server.js`: the node.js server
 
- 
+To run the example with a local server:
+- install the node packages: `npm install`
+- launch the server: `node server.js`
+- open the client web page `index.html` in you favourite browser
+- open the Max patch `max-receiver.maxpat` in Cycling'74 Max
