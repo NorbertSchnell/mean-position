@@ -2,8 +2,8 @@ const positionDot = document.querySelector('.dot.position');
 const meanDot = document.querySelector('.dot.mean');
 let mouseIsDown = false;
 
-const socket = new WebSocket('wss://nschnell.uber.space/mean-position/');
-//const socket = new WebSocket('ws://localhost:8000');
+//const socket = new WebSocket('wss://nschnell.uber.space/mean-position/');
+const socket = new WebSocket('ws://localhost:8000');
 
 window.addEventListener('touchstart', onPointerStart, false);
 window.addEventListener('touchmove', onPointerMove, false);
@@ -17,18 +17,30 @@ window.addEventListener('mouseup', onPointerEnd, false);
 
 // listen to connection open
 socket.addEventListener('open', (event) => {
+  // send regular ping messages
   setInterval(() => {
     if (socket.readyState == socket.OPEN) {
       socket.send('');
     }
-  }, 30000);
+  }, 20000);
 });
 
 // listen to message from server
 socket.addEventListener('message', (event) => {
-  const mean = JSON.parse(event.data);
-  meanDot.style.left = `${100 * mean[0]}%`;
-  meanDot.style.top = `${100 * mean[1]}%`;
+  const message = event.data;
+
+  if (message.length > 0) {
+    const incoming = JSON.parse(message);
+
+    // dispatch incomming message
+    switch (incoming.selector) {
+      case 'mean':
+        const mean = incoming.data;
+        meanDot.style.left = `${100 * mean[0]}%`;
+        meanDot.style.top = `${100 * mean[1]}%`;
+        break;
+    }
+  }
 });
 
 function setPosition(x, y) {
@@ -37,7 +49,10 @@ function setPosition(x, y) {
 
   positionDot.style.left = `${100 * x}%`;
   positionDot.style.top = `${100 * y}%`;
-  socket.send(`[${x}, ${y}]`);
+
+  const outgoing = { selector: 'position', data: [x, y] };
+  const str = JSON.stringify(outgoing);
+  socket.send(str);
 }
 
 function onPointerStart(e) {
