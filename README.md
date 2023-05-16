@@ -15,5 +15,5 @@ The follwing files are important:
 To run the example with a local server:
 - install the node packages: `npm install`
 - launch the server: `node server.js`
-- open the client web page `index.html` in you favourite browser
+- open the client webpage `index.html` in your favourite browser
 - open the Max patch `max-receiver.maxpat` in Cycling'74 Max
